@@ -1,5 +1,7 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
+    return if ActiveRecord::Base.connection.tables.include?("companies")
+
     create_table :companies do |t|
       t.string :name
       t.string :identifier
