@@ -1,0 +1,10 @@
+<% if @project.companies.size >= 1 %>
+  <div class="companies box">
+    <h3><%= t(:label_company_plural) %></h3>
+    <ul>
+      <% @project.all_companies.each do |company| %>
+        <li><%= link_to company.name, company %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

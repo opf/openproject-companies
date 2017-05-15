@@ -46,7 +46,7 @@ class Company < ActiveRecord::Base
   end
 
   def all_projects
-    if Setting.plugin_chiliproject_companies['auto_calculate_proyects']
+    if Setting.plugin_openproject_companies['auto_calculate_proyects']
       pr = []
       self.members.each do |u|
         pr << u.project_ids

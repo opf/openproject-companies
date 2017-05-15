@@ -1,0 +1,40 @@
+<%= error_messages_for 'company' %>
+
+<%= form_for @company, :builder => TabularFormBuilder, :html => {:multipart => true} do |f| %>
+
+  <div class="box tabular ">
+    <p><%= f.text_field :name, :required => true %></p>
+    <p><%= f.text_field :identifier, :required => true %></p>
+    <p><%= f.text_field :short_description, :required => true %></p>
+    <p><%= f.text_area :description %></p>
+    <p><%= f.text_field :url %></p>
+
+    <% @company.custom_field_values.each do |value| %>
+      <p><%= custom_field_tag_with_label :company, value %></p>
+    <% end %>
+
+    <p><%= logo_of(@company) %></p>
+    <p><%= f.file_field :logo, :size => 30 %> </p>
+  </div>
+
+  <%= submit_tag l(@company.new_record? ? :button_create : :button_save) %>
+
+<% end %>
+
+<% unless @company.new_record? %>
+
+  <div style="clear: both;"></div>
+
+  <div id="company-projects" class="splitcontentleft">
+    <%= render :partial => 'projects' %>
+  </div>
+
+  <div id="company-members" class="splitcontentright">
+    <%= render :partial => 'members' %>
+  </div>
+
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'companies/companies', plugin: :openproject_companies %>
+<% end %>

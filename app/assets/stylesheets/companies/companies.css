@@ -1,0 +1,38 @@
+.controller-companies .filtered_results {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.controller-companies legend {
+  font-weight: bold;
+}
+
+.controller-companies .filter_label {
+  display: block;
+}
+
+#company-members.splitcontentleft,
+#company-projects.splitcontentleft {
+  float: left;
+  width: 64%;
+}
+
+#company-members.splitcontentright,
+#company-projects.splitcontentright {
+  float: left;
+  width: 34%;
+}
+
+.controller-companies #members,
+.controller-companies #projects {
+  margin-top: 30px;
+}
+
+.controller-companies .members h3,
+.controller-companies .projects h3 {
+  margin-top: 0;
+}
+
+.controller-companies .box {
+  padding: 10px;
+}

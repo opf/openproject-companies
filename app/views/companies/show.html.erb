@@ -1,0 +1,59 @@
+<div class="contextual">
+	<% if User.current.allowed_to?(:edit_company, nil, :global => true) %>
+	  <%= link_to "Edit #{@company.name}", edit_company_path(@company), :class => 'icon icon-edit' %> |
+	<% end %>
+	<% if User.current.allowed_to?(:add_company, nil, :global => true) %>
+		<%= link_to "New company", new_company_path, :class => 'icon icon-add' %>
+	<% end %>
+</div>
+
+<h2><%= link_to t(:label_company_plural), companies_path %> &#187; <%= @company.name %></h2>
+
+<p><h3><%= @company.short_description %></h3></p>
+
+<div id="company-members" class="splitcontentleft">
+  <% if @company.url.present? %>
+    <p><%= link_to @company.url, @company.url, :class => "external" %></p>
+  <% end %>
+
+  <p><%= logo_of(@company) %></p>
+
+  <%= textilizable @company.description %>
+
+  <% if @company.has_custom_values? %>
+    <table>
+      <% @company.custom_values.each do |custom_value| %>
+        <tr>
+          <td><b><%= custom_value.custom_field.name %></b></td>
+          <td> <%= show_value(custom_value) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+
+</div>
+
+<div id="company-projects" class="splitcontentright">
+  <% if @projects.any? %>
+    <div class="projects box">
+      <h3 class="icon icon-projects"><%= t(:label_project_plural) %></h3>
+      <%= render_project_list @projects %>
+    </div>
+  <% end %>
+  <% if @members.any? %>
+    <div class="members box">
+      <h3 class="icon icon-user"><%= t(:label_member_plural) %></h3>
+      <ul>
+        <% @members.each do |member| %>
+          <li><%= link_to member.name, member %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<% html_title "#{t(:label_company)} - #{@company.name}" %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'companies/companies', plugin: 'openproject_companies' %>
+<% end %>

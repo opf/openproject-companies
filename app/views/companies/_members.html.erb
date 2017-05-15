@@ -1,0 +1,62 @@
+<div class="splitcontentleft">
+  <% if @members.any? %>
+    <table class="list members">
+      <thead><tr><th><%= l(:label_member_plural) %></th><th></th></tr></thead>
+      <tbody>
+        <% @members.each do |member| %>
+          <% next if member.new_record? %>
+          <tr id="member-<%= member.id %>" class="<%= cycle 'odd', 'even' %> member">
+            <td class="member"><%= link_to_user member %></td>
+            <td class="buttons">
+              <%=
+                link_to t(:button_delete),
+                        delete_member_company_path(id: @company, member_id: member.id),
+                        method: :post,
+                        title: t(:button_delete),
+                        class: 'icon icon-del'
+              %>
+            </td>
+          </tr>
+        <% end; reset_cycle %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="generic-table--container" style="height:150px">
+        <div class="generic-table--no-results-container">
+          <i class="icon-info1"></i>
+          <h2 class="generic-table--no-results-title">
+            <%= t(:label_no_data) %>
+          </h2>
+          <div class="generic-table--no-results-description">
+            <p>No users are associated with this company.</p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<div class="splitcontentright">
+  <% if @available_members.any? %>
+    <%=
+      form_for(
+        :member,
+        url: { :controller => 'companies', :action => 'add_members', :id => @company },
+        update: :members,
+        method: :post
+      ) do |f|
+    %>
+      <fieldset>
+        <legend><%= l(:label_member_new) %></legend>
+
+        <p><%= label_tag "member_search", l(:label_member_filter), :class => 'filter_label' %>
+        <%= text_field_tag 'member_search', nil %></p>
+        <%#= observe_field( :member_search, :method => :get, :frequency => 0.5, :update => :available_members, :url => {:action => "filter_available_members", :controller=>"companies" , :id => @company }, :with => "q" ) %>
+        <div id="available_members" class="filtered_results">
+          <%= render :partial => 'available_members' %>
+        </div>
+
+        <p><%= submit_tag l(:button_add) %></p>
+      </fieldset>
+    <% end %>
+  <% end %>
+</div>

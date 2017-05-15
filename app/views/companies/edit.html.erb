@@ -1,0 +1,7 @@
+<%= javascript_include_tag "companies/companies", plugin: :openproject_companies_plugin %>
+
+<h2><%= link_to t(:label_company_plural), companies_path %> &#187; <%= @company.name %></h2>
+
+<%= render :partial => 'form' %>
+
+<% html_title "#{t(:label_company_plural)} - #{@company.name}" %>
