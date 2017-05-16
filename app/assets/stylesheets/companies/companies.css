@@ -11,14 +11,14 @@
   display: block;
 }
 
-#company-members.splitcontentleft,
-#company-projects.splitcontentleft {
+#company-members div.splitcontentleft,
+#company-projects div.splitcontentleft {
   float: left;
   width: 64%;
 }
 
-#company-members.splitcontentright,
-#company-projects.splitcontentright {
+#company-members div.splitcontentright,
+#company-projects div.splitcontentright {
   float: left;
   width: 34%;
 }
@@ -35,4 +35,12 @@
 
 .controller-companies .box {
   padding: 10px;
+}
+
+#company-projects {
+  padding-top: 2em;
+}
+
+#company-members {
+  padding-top: 2em;
 }

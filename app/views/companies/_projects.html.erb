@@ -3,26 +3,46 @@
 <% else %>
   <div class="splitcontentleft">
     <% if @projects.any? %>
-      <table class="list projects">
-        <thead><tr><th><%= l(:label_project_plural) %></th><th></th></tr></thead>
-        <tbody>
-          <% @projects.each do |project| %>
-            <% next if project.new_record? %>
-            <tr id="project-<%= project.id %>" class="<%= cycle 'odd', 'even' %> project">
-              <td class="project"><%= link_to_project project %></td>
-              <td class="buttons">
-                <%=
-                  link_to t(:button_delete),
-                          delete_project_company_path(id: @company, project_id: project.id),
-                          method: :post,
-                          title: t(:button_delete),
-                          class: 'icon icon-del'
-                %>
-              </td>
-            </tr>
-          <% end; reset_cycle %>
-        </tbody>
-      </table>
+      <div class="generic-table--container">
+        <div class="generic-table--results-container">
+          <table class="generic-table list projects">
+            <colgroup>
+              <col highlight-col>
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>
+                  <div class="generic-table--header-outer">
+                    <div class="generic-table--header">
+                      <%= t(:label_project_plural) %>
+                    </div>
+                  </div>
+                </th>
+                <th>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @projects.each do |project| %>
+                <% next if project.new_record? %>
+                <tr id="project-<%= project.id %>" class="<%= cycle 'odd', 'even' %> project">
+                  <td class="project"><%= link_to_project project %></td>
+                  <td class="buttons">
+                    <%=
+                      link_to "",
+                              delete_project_company_path(id: @company, project_id: project.id),
+                              method: :post,
+                              title: t(:button_delete),
+                              class: 'icon icon-delete'
+                    %>
+                  </td>
+                </tr>
+              <% end; reset_cycle %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     <% else %>
       <div class="generic-table--container" style="height:150px">
         <div class="generic-table--no-results-container">
