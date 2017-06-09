@@ -134,6 +134,18 @@ class CompaniesController < ApplicationController
     params
       .require(:company)
       .permit(:name, :identifier, :short_description, :description, :url, :logo)
-      .merge(custom_field_values: params.require(:company)[:custom_field_values].permit!)
+      .merge(custom_field_values: params.require(:company)[:custom_field_values])
+  end
+
+  def default_breadcrumb
+    if action_name == 'index'
+      t('label_company_plural')
+    else
+      ActionController::Base.helpers.link_to(t('label_company_plural'), companies_path)
+    end
+  end
+
+  def show_local_breadcrumb
+    true
   end
 end

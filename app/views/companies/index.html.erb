@@ -1,13 +1,15 @@
 <% html_title t(:label_company_plural) -%>
 <%= toolbar title: t(:label_company_plural) do %>
   <% if User.current.allowed_to?(:add_company, nil, :global => true) %>
-    <%= link_to new_company_path,
-        { class: 'button -alt-highlight',
-          aria: {label: t(:label_user_new)},
-          title: t(:label_company_new)} do %>
-      <%= op_icon('button--icon icon-add') %>
-      <span class="button--text"><%= t('activerecord.models.Company') %></span>
-    <% end %>
+    <li class="toolbar-item">
+      <%= link_to new_company_path,
+          { class: 'button -alt-highlight',
+            aria: {label: t(:label_user_new)},
+            title: t(:label_company_new)} do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text"><%= t('activerecord.models.Company') %></span>
+      <% end %>
+    </li>
   <% end %>
   <%= call_hook(:company_admin_action_menu) %>
 <% end %>
@@ -65,7 +67,9 @@
           </th>
 
           <% if User.current.allowed_to?(:edit_company, nil, :global => true) %>
-            <th></th>
+            <th>
+              <div class="generic-table--empty-header"></div>
+            </th>
           <% end %>
         </tr>
       </thead>

@@ -1,82 +1,75 @@
-<div class="splitcontentleft">
-  <% if @members.any? %>
-    <div class="generic-table--container">
-      <div class="generic-table--results-container">
-        <table class="generic-table list members">
-          <colgroup>
-            <col highlight-col>
-            <col>
-          </colgroup>
-          <thead>
-            <tr>
-              <th>
-                <div class="generic-table--header-outer">
-                  <div class="generic-table--header">
-                    <%= t(:label_member_plural) %>
+<div class="grid-block -no-outer-padding">
+  <div class="grid-content medium-6">
+    <% if @members.any? %>
+      <div class="generic-table--container">
+        <div class="generic-table--results-container">
+          <table class="generic-table list members">
+            <colgroup>
+              <col highlight-col>
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>
+                  <div class="generic-table--header-outer">
+                    <div class="generic-table--header">
+                      <%= t(:label_member_plural) %>
+                    </div>
                   </div>
-                </div>
-              </th>
-              <th>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @members.each do |member| %>
-              <% next if member.new_record? %>
-              <tr id="member-<%= member.id %>" class="<%= cycle 'odd', 'even' %> member">
-                <td class="member"><%= link_to_user member %></td>
-                <td class="buttons">
-                  <%=
-                    link_to "",
-                            delete_member_company_path(id: @company, member_id: member.id),
-                            method: :post,
-                            title: t(:button_delete),
-                            class: 'icon icon-delete'
-                  %>
-                </td>
+                </th>
+                <th>
+                  <div class="generic-table--empty-header"></div>
+                </th>
               </tr>
-            <% end; reset_cycle %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  <% else %>
-    <div class="generic-table--container" style="height:150px">
-        <div class="generic-table--no-results-container">
-          <i class="icon-info1"></i>
-          <h2 class="generic-table--no-results-title">
-            <%= t(:label_no_data) %>
-          </h2>
-          <div class="generic-table--no-results-description">
-            <p>No users are associated with this company.</p>
-          </div>
+            </thead>
+            <tbody>
+              <% @members.each do |member| %>
+                <% next if member.new_record? %>
+                <tr id="member-<%= member.id %>" class="member">
+                  <td class="member"><%= link_to_user member %></td>
+                  <td class="buttons">
+                    <%=
+                      link_to "",
+                              delete_member_company_path(id: @company, member_id: member.id),
+                              method: :post,
+                              title: t(:button_delete),
+                              class: 'icon icon-delete'
+                    %>
+                  </td>
+                </tr>
+              <% end; reset_cycle %>
+            </tbody>
+          </table>
         </div>
       </div>
-  <% end %>
-</div>
-
-<div class="splitcontentright">
-  <% if @available_members.any? %>
-    <%=
-      form_for(
-        :member,
-        url: { :controller => 'companies', :action => 'add_members', :id => @company },
-        update: :members,
-        method: :post
-      ) do |f|
-    %>
-      <fieldset>
-        <legend><%= l(:label_member_new) %></legend>
-
-        <p><%= label_tag "member_search", l(:label_member_filter), :class => 'filter_label' %>
-        <%= text_field_tag 'member_search', nil %></p>
-        <%#= observe_field( :member_search, :method => :get, :frequency => 0.5, :update => :available_members, :url => {:action => "filter_available_members", :controller=>"companies" , :id => @company }, :with => "q" ) %>
-        <div id="available_members" class="filtered_results">
-          <%= render :partial => 'available_members' %>
-        </div>
-
-        <p><%= submit_tag l(:button_add) %></p>
-      </fieldset>
+    <% else %>
+        <%= no_results_box custom_title: t(:notice_no_users) %>
     <% end %>
-  <% end %>
+  </div>
+
+  <div class="grid-content medium-6">
+    <% if @available_members.any? %>
+      <%=
+        form_for(
+          :member,
+          url: { :controller => 'companies', :action => 'add_members', :id => @company },
+          update: :members,
+          method: :post
+        ) do |f|
+      %>
+        <fieldset class="form--fieldset">
+          <legend class="form--fieldset-legend"><%= l(:label_member_new) %></legend>
+
+          <p><%= label_tag "member_search", l(:label_member_filter), :class => 'filter_label' %>
+          <%= text_field_tag 'member_search', nil %></p>
+          <%#= observe_field( :member_search, :method => :get, :frequency => 0.5, :update => :available_members, :url => {:action => "filter_available_members", :controller=>"companies" , :id => @company }, :with => "q" ) %>
+          <div id="available_members" class="filtered_results">
+            <%= render :partial => 'available_members' %>
+          </div>
+
+          <%= styled_button_tag t(:button_add), class: '-highlight -with-icon icon-checkmark' %>
+        </fieldset>
+      <% end %>
+    <% end %>
+  </div>
 </div>

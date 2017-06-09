@@ -1,24 +1,36 @@
+<% html_title "#{t(:label_administration)} - #{t(:label_company_plural)}" %>
+
 <p><%= t(:label_companies_settings_proyects) %></p>
 
-<p>
-  <label><%= t(:field_auto_calculate_proyects) %></label>
-  <%= check_box_tag 'settings[auto_calculate_proyects]', '1', @settings['auto_calculate_proyects'] %>
-</p>
+<div class="form--field">
+  <label class="form--label" for="settings_auto_calculate_proyects">
+    <%= t(:field_auto_calculate_proyects) %>
+  </label>
+  <%= styled_check_box_tag 'settings[auto_calculate_proyects]', '1', @settings['auto_calculate_proyects'] %>
+</div>
 
 <p><%= t(:label_companies_settings_intro) %></p>
 
-<p>
-  <label><%= t(:field_top_text) %></label>
-  <%= text_area_tag 'settings[top_text]', @settings['top_text'], :rows => 5, :class => 'wiki-edit' %>
-</p>
-<%= wikitoolbar_for 'settings_top_text' %>
+<div class="form--field">
+  <label class="form--label" for="settings_top_text"><%= t(:field_top_text) %></label>
+  <span class="form--field-container">
+    <span class="form--text-area-container">
+      <%= text_area_tag 'settings[top_text]', @settings['top_text'], :rows => 5, :class => 'wiki-edit' %>
+      <%= wikitoolbar_for 'settings_top_text' %>
+    </span>
+  </span>
+</div>
 
-<p>
-  <label><%= t(:field_bottom_text) %></label>
-  <%= text_area_tag 'settings[bottom_text]', @settings['bottom_text'], :rows => 5, :class => 'wiki-edit' %>
-</p>
-<%= wikitoolbar_for 'settings_bottom_text' %>
+<div class="form--field">
+  <label class="form--label" for="settings_top_text"><%= t(:field_bottom_text) %></label>
+  <span class="form--field-container">
+    <span class="form--text-area-container">
+      <%= text_area_tag 'settings[bottom_text]', @settings['bottom_text'], :rows => 5, :class => 'wiki-edit' %>
+      <%= wikitoolbar_for 'settings_bottom_text' %>
+    </span>
+  </span>
+</div>
 
-<p>
-  <%= link_to t(:label_custom_field_plural), :controller => 'custom_fields', :action => 'index', :params => {:tab => 'CompanyCustomField'} %> <%= t(:notice_save_before_clicking) %>
-</p>
+<%= link_to t(:label_custom_field_plural), :controller => 'custom_fields', :action => 'index', :params => {:tab => 'CompanyCustomField'} %>
+<p><%= t(:notice_save_before_clicking) %></p>
+

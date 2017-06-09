@@ -2,22 +2,22 @@
 
 <%= form_for @company, :builder => TabularFormBuilder, :html => {:multipart => true} do |f| %>
 
-  <div class="box tabular ">
-    <p><%= f.text_field :name, :required => true %></p>
-    <p><%= f.text_field :identifier, :required => true %></p>
-    <p><%= f.text_field :short_description, :required => true %></p>
-    <p><%= f.text_area :description %></p>
-    <p><%= f.text_field :url %></p>
+  <section class="form--section">
+    <div class="form--field -required"><%= f.text_field :name, :required => true, container_class: '-wide' %></div>
+    <div class="form--field -required"><%= f.text_field :identifier, :required => true, container_class: '-wide' %></div>
+    <div class="form--field -required"><%= f.text_field :short_description, :required => true, container_class: '-wide' %></div>
+    <div class="form--field"><%= f.text_area :description, container_class: '-wide' %></div>
+    <div class="form--field"><%= f.text_field :url, container_class: '-wide' %></div>
 
     <% @company.custom_field_values.each do |value| %>
-      <p><%= custom_field_tag_with_label :company, value %></p>
+      <div class="form--field"><%= custom_field_tag_with_label :company, value %></div>
     <% end %>
 
-    <p><%= logo_of(@company) %></p>
+    <%= logo_of(@company) %>
     <p><%= f.file_field :logo, :size => 30 %> </p>
-  </div>
+  </section>
 
-  <%= submit_tag l(@company.new_record? ? :button_create : :button_save) %>
+  <%= styled_button_tag l(@company.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>
 
 <% end %>
 

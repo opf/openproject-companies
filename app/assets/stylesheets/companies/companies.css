@@ -11,18 +11,6 @@
   display: block;
 }
 
-#company-members div.splitcontentleft,
-#company-projects div.splitcontentleft {
-  float: left;
-  width: 64%;
-}
-
-#company-members div.splitcontentright,
-#company-projects div.splitcontentright {
-  float: left;
-  width: 34%;
-}
-
 .controller-companies #members,
 .controller-companies #projects {
   margin-top: 30px;
@@ -38,9 +26,17 @@
 }
 
 #company-projects {
-  padding-top: 2em;
+  margin-top: 1em;
 }
 
 #company-members {
-  padding-top: 2em;
+  margin-top: 1em;
+}
+
+.-no-outer-padding div:first-child {
+  padding-left: 0;
+}
+
+.-no-outer-padding div:last-child {
+  padding-right: 0;
 }

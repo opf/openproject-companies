@@ -24,6 +24,9 @@ en:
   notice_company_member_deleted: "Member removed"
   notice_company_project_added: "Project added"
   notice_company_project_deleted: "Project removed"
+  notice_auto_calculate_proyects: "Proyects will be linked based on users. If you want to indicate proyects manually, you may change the plugin configuration."
+  notice_no_project: "No projects are associated with this company."
+  notice_no_users: "No users are associated with this company."
 
   activerecord:
     models:
