@@ -134,7 +134,7 @@ class CompaniesController < ApplicationController
     params
       .require(:company)
       .permit(:name, :identifier, :short_description, :description, :url, :logo)
-      .merge(custom_field_values: params.require(:company)[:custom_field_values])
+      .merge(custom_field_values: params.require(:company)[:custom_field_values].permit!)
   end
 
   def default_breadcrumb
