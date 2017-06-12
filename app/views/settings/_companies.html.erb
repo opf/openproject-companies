@@ -1,12 +1,12 @@
 <% html_title "#{t(:label_administration)} - #{t(:label_company_plural)}" %>
 
-<p><%= t(:label_companies_settings_proyects) %></p>
+<p><%= t(:label_companies_settings_projects) %></p>
 
 <div class="form--field">
-  <label class="form--label" for="settings_auto_calculate_proyects">
-    <%= t(:field_auto_calculate_proyects) %>
+  <label class="form--label" for="settings_auto_calculate_projects">
+    <%= t(:field_auto_calculate_projects) %>
   </label>
-  <%= styled_check_box_tag 'settings[auto_calculate_proyects]', '1', @settings['auto_calculate_proyects'] %>
+  <%= styled_check_box_tag 'settings[auto_calculate_projects]', '1', @settings['auto_calculate_projects'] %>
 </div>
 
 <p><%= t(:label_companies_settings_intro) %></p>
@@ -33,4 +33,3 @@
 
 <%= link_to t(:label_custom_field_plural), :controller => 'custom_fields', :action => 'index', :params => {:tab => 'CompanyCustomField'} %>
 <p><%= t(:notice_save_before_clicking) %></p>
-

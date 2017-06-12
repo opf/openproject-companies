@@ -16,7 +16,7 @@ module OpenProject
             default: {
               'top_text' => '',
               'bottom_text' => '',
-              'auto_calculate_proyects' => false
+              'auto_calculate_projects' => false
             }
           }
         end
@@ -56,6 +56,10 @@ module OpenProject
         :ProjectsHelper,
         :User
       ]
+
+      initializer 'companies.register_hooks' do
+        require 'open_project/companies/hooks'
+      end
 
       assets %w(companies/companies.css companies/companies.js)
     end

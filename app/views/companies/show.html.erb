@@ -23,7 +23,7 @@
 <h3><%= @company.short_description %></h3>
 
 <div class="grid-block">
-  <div id="company-members" class="grid-content">
+  <div id="company-description" class="grid-content">
     <% if @company.url.present? %>
       <p><%= link_to @company.url, @company.url, :class => "external" %></p>
     <% end %>
@@ -46,7 +46,7 @@
     <% end %>
   </div>
 
-  <div id="company-projects" class="grid-content">
+  <div id="company-relations" class="grid-content">
     <% if @projects.any? %>
       <div class="projects box">
         <h3 class="icon-context icon6 icon-projects"><%= t(:label_project_plural) %></h3>

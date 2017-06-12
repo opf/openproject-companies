@@ -15,7 +15,7 @@ module OpenProject
             scope :sorted_alphabetically, -> { order(name: :asc) }
 
             def all_companies
-              if Setting.plugin_openproject_companies['auto_calculate_proyects']
+              if Setting.plugin_openproject_companies['auto_calculate_projects']
                 co = []
                 users.each do |u|
                   co << u.company_ids

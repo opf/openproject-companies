@@ -3,7 +3,7 @@ en:
   field_logo: "Logo"
   field_url: "Website url"
 
-  field_auto_calculate_proyects: "Calculate projects based on users?"
+  field_auto_calculate_projects: "Calculate projects based on users?"
   field_top_text: "Top Text"
   field_bottom_text: "Bottom Text"
 
@@ -15,7 +15,7 @@ en:
   label_member_filter: "Filter members by name"
   label_project_filter: "Filter projects by name"
 
-  label_companies_settings_proyects: "You may specify the projects linked to a company manually or list the companiy's users proyects (auto)"
+  label_companies_settings_projects: "You may specify the projects linked to a company manually or list the companiy's users projects (auto)"
   label_companies_settings_intro: "You may specify two texts that will be shown on the companies index page: one of them above the companies table and the other one below it."
 
   notice_save_before_clicking: "(Save before clicking on this link)"
@@ -24,7 +24,7 @@ en:
   notice_company_member_deleted: "Member removed"
   notice_company_project_added: "Project added"
   notice_company_project_deleted: "Project removed"
-  notice_auto_calculate_proyects: "Proyects will be linked based on users. If you want to indicate proyects manually, you may change the plugin configuration."
+  notice_auto_calculate_projects: "Projects will be linked based on users. If you want to indicate projects manually, you may change the plugin configuration."
   notice_no_project: "No projects are associated with this company."
   notice_no_users: "No users are associated with this company."
 
