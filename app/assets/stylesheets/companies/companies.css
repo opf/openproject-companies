@@ -25,11 +25,13 @@
   padding: 10px;
 }
 
-#company-projects {
+#company-description {
+  flex: 5 !important;
   margin-top: 1em;
 }
 
-#company-members {
+#company-relations {
+  flex: 3 !important;
   margin-top: 1em;
 }
 
