@@ -83,8 +83,8 @@
                 <%=h show_value(company.custom_value_for(custom_value)) %>
               </th>
             <% end %>
-            <td class="center"><%= link_to company.all_projects.count, company %></td>
-            <td class="center"><%= link_to company.members.count, company %></td>
+            <td class="center"><%= company.all_projects.count %></td>
+            <td class="center"><%= company.members.count %></td>
             <% if User.current.allowed_to?(:edit_company, nil, :global => true) %>
               <td class="buttons">
                 <%= link_to "", edit_company_path(company), class: 'icon icon-edit' %>

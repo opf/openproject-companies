@@ -6,7 +6,7 @@
     <li class="toolbar-item">
       <%= link_to edit_company_path(@company), :class => 'button' do %>
         <%= op_icon('button--icon icon-edit') %>
-        <span class="button--text"><%= t(:label_edit) + ' ' + @company.name %></span>
+        <span class="button--text"><%= t(:label_edit) %></span>
       <% end %>
     </li>
   <% end %>
@@ -14,7 +14,7 @@
     <li class="toolbar-item">
       <%= link_to new_company_path, :class => 'button -alt-highlight' do %>
         <%= op_icon('button--icon icon-add') %>
-        <span class="button--text"><%= t(:label_company_new)  %></span>
+        <span class="button--text"><%= t(:label_company)  %></span>
       <% end %>
     </li>
   <% end %>
@@ -22,7 +22,7 @@
 
 <h3><%= @company.short_description %></h3>
 
-<div class="grid-block">
+<div class="grid-block -no-outer-padding">
   <div id="company-description" class="grid-content">
     <% if @company.url.present? %>
       <p><%= link_to @company.url, @company.url, :class => "external" %></p>
@@ -46,16 +46,22 @@
     <% end %>
   </div>
 
-  <div id="company-relations" class="grid-content">
+  <div id="company-relations" class="grid-content widget-boxes">
     <% if @projects.any? %>
-      <div class="projects box">
-        <h3 class="icon-context icon6 icon-projects"><%= t(:label_project_plural) %></h3>
+      <div class="projects widget-box">
+        <h3 class="widget-box--header">
+          <%= op_icon('icon-context icon-projects') %>
+          <span class="widget-box--header-title"><%= t(:label_project_plural) %></span>
+        </h3>
         <%= render_project_list @projects %>
       </div>
     <% end %>
     <% if @members.any? %>
-      <div class="members box">
-        <h3 class="icon-context icon6 icon-user"><%= t(:label_member_plural) %></h3>
+      <div class="members widget-box">
+        <h3 class="widget-box--header">
+          <%= op_icon('icon-context icon-group') %>
+          <span class="widget-box--header-title"><%= t(:label_member_plural) %></span>
+        </h3>
         <ul>
           <% @members.each do |member| %>
             <li><%= link_to member.name, member %></li>
