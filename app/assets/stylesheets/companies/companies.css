@@ -1,6 +1,7 @@
 .controller-companies .filtered_results {
   max-height: 400px;
   overflow: auto;
+  margin-bottom: 10px;
 }
 
 .controller-companies legend {
@@ -21,10 +22,6 @@
   margin-top: 0;
 }
 
-.controller-companies .box {
-  padding: 10px;
-}
-
 #company-description {
   flex: 5 !important;
   margin-top: 1em;
@@ -35,10 +32,10 @@
   margin-top: 1em;
 }
 
-.-no-outer-padding div:first-child {
+.-no-outer-padding > div:first-child {
   padding-left: 0;
 }
 
-.-no-outer-padding div:last-child {
+.-no-outer-padding > div:last-child {
   padding-right: 0;
 }

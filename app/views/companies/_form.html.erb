@@ -13,8 +13,8 @@
       <div class="form--field"><%= custom_field_tag_with_label :company, value %></div>
     <% end %>
 
-    <%= logo_of(@company) %>
     <p><%= f.file_field :logo, :size => 30 %> </p>
+    <%= logo_of(@company) %>
   </section>
 
   <%= styled_button_tag l(@company.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>

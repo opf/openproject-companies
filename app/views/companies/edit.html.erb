@@ -1,7 +1,7 @@
 <%= javascript_include_tag "companies/companies", plugin: :openproject_companies_plugin %>
 
 <% breadcrumb_paths(default_breadcrumb, @company.name) %>
-<%= toolbar title: ((link_to t(:label_company_plural), companies_path) + ': ' + @company.name) %>
+<%= toolbar title: @company.name %>
 
 <%= render :partial => 'form' %>
 
