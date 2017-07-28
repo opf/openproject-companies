@@ -39,3 +39,7 @@
 .-no-outer-padding > div:last-child {
   padding-right: 0;
 }
+
+table.generic-table .-no-padding-left {
+  padding-left: 0;
+}
