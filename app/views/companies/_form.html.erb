@@ -13,8 +13,17 @@
       <div class="form--field"><%= custom_field_tag_with_label :company, value %></div>
     <% end %>
 
-    <p><%= f.file_field :logo, :size => 30 %> </p>
-    <%= logo_of(@company) %>
+    <fieldset class="form--fieldset">
+      <legend class="form--fieldset-legend"><%= l(:field_logo) %></legend>
+      <div class="form--field">
+        <div class="attachment_field form--field-container">
+          <div class="form--file-container">
+            <%= f.file_field :logo, size: 30, id: nil, no_label: true %>
+          </div>
+        </div>
+      </div>
+      <%= logo_of(@company) %>
+    </fieldset>
   </section>
 
   <%= styled_button_tag l(@company.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>
