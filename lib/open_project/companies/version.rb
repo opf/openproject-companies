@@ -1,5 +1,5 @@
 module OpenProject
   module Companies
-    VERSION = "6.1.5"
+    VERSION = "7.4.0"
   end
 end
