@@ -31,9 +31,9 @@
 require 'spec_helper'
 
 describe CompaniesController, type: :controller do
-  let(:user) { FactoryGirl.create :admin }
+  let(:user) { FactoryBot.create :admin }
 
-  let!(:companies) { FactoryGirl.create_list :company, 5 }
+  let!(:companies) { FactoryBot.create_list :company, 5 }
 
   before do
     login_as user

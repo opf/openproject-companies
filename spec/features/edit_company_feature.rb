@@ -29,12 +29,12 @@
 require 'spec_helper'
 
 describe 'Edit Company', type: :feature do
-  let(:company) { FactoryGirl.create :company, projects: [project] }
-  let(:admin) { FactoryGirl.create :admin }
-  let(:user) { FactoryGirl.create :user }
+  let(:company) { FactoryBot.create :company, projects: [project] }
+  let(:admin) { FactoryBot.create :admin }
+  let(:user) { FactoryBot.create :user }
 
-  let(:project) { FactoryGirl.create :project }
-  let(:role) { FactoryGirl.create :role }
+  let(:project) { FactoryBot.create :project }
+  let(:role) { FactoryBot.create :role }
 
   before do
     project.add_member! user, role
