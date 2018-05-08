@@ -28,7 +28,7 @@
 # See doc/COPYRIGHT.rdoc for more details.
 #++
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :company do
     sequence(:name) { |n| "Company #{n}" }
     sequence(:identifier) { |n| "company-#{n}" }
