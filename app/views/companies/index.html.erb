@@ -14,7 +14,7 @@
   <%= call_hook(:company_admin_action_menu) %>
 <% end %>
 
-<%= textilizable @settings[:top_text] %>
+<%= format_text @settings[:top_text] %>
 
 <div class="generic-table--container">
   <div class="generic-table--results-container">
@@ -107,5 +107,5 @@
 </div>
 
 <p>
-  <%= textilizable @settings[:bottom_text] %>
+  <%= format_text @settings[:bottom_text] %>
 </p>
