@@ -51,7 +51,6 @@ module OpenProject
       end
 
       patches [
-        :CustomFieldsHelper,
         :Project,
         :ProjectsHelper,
         :User
@@ -59,6 +58,10 @@ module OpenProject
 
       initializer 'companies.register_hooks' do
         require 'open_project/companies/hooks'
+      end
+
+      initializer 'companies.traits' do
+        require 'open_project/companies/traits/custom_fields_helper'
       end
 
       assets %w(companies/companies.css companies/companies.js)
