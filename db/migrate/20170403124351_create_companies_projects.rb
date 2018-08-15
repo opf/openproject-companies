@@ -1,4 +1,4 @@
-class CreateCompaniesProjects < ActiveRecord::Migration
+class CreateCompaniesProjects < ActiveRecord::Migration[5.0]
   def change
     return if ActiveRecord::Base.connection.tables.include?("companies_projects")
 
