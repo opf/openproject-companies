@@ -60,7 +60,10 @@ class Company < ActiveRecord::Base
   private
 
   def attach_logo
-    Attachment.attach_files(self, "1" => {'file' => @logo_file, 'description' => 'logo'}) if @logo_file
-  end
+    if @logo_file
+      attach_files("1" => {'file' => @logo_file, 'description' => 'logo'})
 
+      attachments.each(&:save!)
+    end
+  end
 end

@@ -1,4 +1,4 @@
-class CreateCompaniesUsers < ActiveRecord::Migration
+class CreateCompaniesUsers < ActiveRecord::Migration[5.0]
   def change
     return if ActiveRecord::Base.connection.tables.include?("companies_users")
 

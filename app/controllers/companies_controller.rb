@@ -1,9 +1,11 @@
 class CompaniesController < ApplicationController
-  before_filter :require_admin, except: [:index, :show]
-  before_filter :get_company_by_identifier, except: [:index, :new, :create]
-  before_filter :get_members, only: [:edit, :update, :show]
-  before_filter :get_projects, only: [:edit, :update]
-  before_filter :get_settings
+  layout "no_menu"
+
+  before_action :require_admin, except: [:index, :show]
+  before_action :get_company_by_identifier, except: [:index, :new, :create]
+  before_action :get_members, only: [:edit, :update, :show]
+  before_action :get_projects, only: [:edit, :update]
+  before_action :get_settings
 
   helper :projects, :custom_fields
 
@@ -131,10 +133,15 @@ class CompaniesController < ApplicationController
   end
 
   def company_attributes
+    custom_field_values = [params.require(:company)[:custom_field_values]]
+      .reject(&:nil?)
+      .map(&:permit!)
+      .first
+
     params
       .require(:company)
       .permit(:name, :identifier, :short_description, :description, :url, :logo)
-      .merge(custom_field_values: params.require(:company)[:custom_field_values].permit!)
+      .merge(custom_field_values: custom_field_values || {})
   end
 
   def default_breadcrumb

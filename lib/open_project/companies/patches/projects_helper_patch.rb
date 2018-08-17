@@ -16,7 +16,7 @@ module OpenProject
             projects.each do |project|
               s << "<li class='root'><div class='root'>" +
                     link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
-              s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
+              s << "<div class='wiki description'>#{format_text(project.short_description, :project => project)}</div>" unless project.description.blank?
               s << "</div></li>\n"
             end
             s << "</ul>"
