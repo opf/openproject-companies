@@ -1,0 +1,111 @@
+<% html_title t(:label_company_plural) -%>
+<%= toolbar title: t(:label_company_plural) do %>
+  <% if User.current.allowed_to?(:add_company, nil, :global => true) %>
+    <li class="toolbar-item">
+      <%= link_to new_company_path,
+          { class: 'button -alt-highlight',
+            aria: {label: t(:label_user_new)},
+            title: t(:label_company_new)} do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text"><%= t('activerecord.models.Company') %></span>
+      <% end %>
+    </li>
+  <% end %>
+  <%= call_hook(:company_admin_action_menu) %>
+<% end %>
+
+<%= format_text @settings[:top_text] %>
+
+<div class="generic-table--container">
+  <div class="generic-table--results-container">
+    <table class="generic-table">
+      <colgroup>
+        <% (1..(5 + @custom_fields.size)).each do |_| %>
+          <col highlight-col>
+        <% end %>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>
+            <div class="generic-table--header-outer">
+              <div class="generic-table--header">
+                <%= Company.human_attribute_name :name %>
+              </div>
+            </div>
+          </th>
+          <th>
+            <div class="generic-table--header-outer">
+              <div class="generic-table--header">
+                <%= Company.human_attribute_name :description %>
+              </div>
+            </div>
+          </th>
+
+          <% @custom_fields.each do |custom_value| %>
+            <th>
+              <div class="generic-table--header-outer">
+                <div class="generic-table--header">
+                  <%= custom_value.name %>
+                </div>
+              </div>
+            </th>
+          <% end %>
+
+          <th>
+            <div class="generic-table--header-outer">
+              <div class="generic-table--header">
+                <%= t(:label_project_plural) %>
+              </div>
+            </div>
+          </th>
+          <th>
+            <div class="generic-table--header-outer">
+              <div class="generic-table--header">
+                <%= t(:label_member_plural) %>
+              </div>
+            </div>
+          </th>
+
+          <% if User.current.allowed_to?(:edit_company, nil, :global => true) %>
+            <th>
+              <div class="generic-table--empty-header"></div>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @companies.each do |company| %>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td class="name center"><%= link_to company.name, company %></td>
+            <td><%= company.short_description %></td>
+            <% @custom_fields.each do |custom_value| %>
+              <td class="center">
+                <%=h show_value(company.custom_value_for(custom_value)) %>
+              </th>
+            <% end %>
+            <td class="center"><%= company.all_projects.count %></td>
+            <td class="center"><%= company.members.count %></td>
+            <% if User.current.allowed_to?(:edit_company, nil, :global => true) %>
+              <td class="buttons">
+                <%= link_to "", edit_company_path(company), class: 'icon icon-edit' %>
+                <%=
+                  link_to(
+                    "",
+                    company,
+                    method: :delete,
+                    class: 'icon icon-delete',
+                    data: { confirm: t(:text_are_you_sure) }
+                  )
+                %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p>
+  <%= format_text @settings[:bottom_text] %>
+</p>

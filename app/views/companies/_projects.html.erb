@@ -1,0 +1,64 @@
+<% if @settings['auto_calculate_projects'] %>
+  <p><%= t(:notice_auto_calculate_projects) %></p>
+<% else %>
+  <div class="grid-block -no-outer-padding">
+    <div class="grid-content medium-6 small-6">
+      <% if @projects.any? %>
+        <fieldset class="form--fieldset">
+          <legend class="form--fieldset-legend"><%= t(:label_project_plural) %></legend>
+          <div class="generic-table--container">
+            <div class="generic-table--results-container">
+              <table class="generic-table list projects">
+                <tbody>
+                  <% @projects.each do |project| %>
+                    <% next if project.new_record? %>
+                    <tr id="project-<%= project.id %>" class="project">
+                      <td class="project -no-padding-left"><%= link_to_project project %></td>
+                      <td class="buttons">
+                        <%=
+                          link_to "",
+                                  delete_project_company_path(id: @company, project_id: project.id),
+                                  method: :post,
+                                  title: t(:button_delete),
+                                  class: 'icon icon-delete'
+                        %>
+                      </td>
+                    </tr>
+                  <% end; reset_cycle %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+      <% else %>
+        <%= no_results_box custom_title: t(:notice_no_project) %>
+      <% end %>
+    </div>
+
+    <div class="grid-content medium-6 small-6">
+      <% if @available_projects.any? %>
+        <%=
+          form_for(
+            :project,
+            url: { controller: 'companies', action: 'add_projects', id: @company },
+            update: 'projects',
+            method: :post
+          ) do |f|
+        %>
+          <fieldset class="form--fieldset">
+            <legend class="form--fieldset-legend"><%= t(:label_project_new) %></legend>
+
+            <p><%= label_tag "project_search", l(:label_project_filter), :class => 'filter_label' %>
+            <%= text_field_tag 'project_search', nil %></p>
+            <%#= observe_field( :project_search, :method => :get, :frequency => 0.5, :update => :available_projects, :url => {:action => "filter_available_projects", :controller=>"companies" , :id => @company }, :with => "q" ) %>
+            <div id="available_projects" class="filtered_results">
+              <%= render :partial => 'available_projects' %>
+            </div>
+
+            <%= styled_button_tag t(:button_add), class: '-highlight -with-icon icon-checkmark' %>
+          </fieldset>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

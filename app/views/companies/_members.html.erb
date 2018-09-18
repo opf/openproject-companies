@@ -1,0 +1,60 @@
+<div class="grid-block -no-outer-padding">
+  <div class="grid-content medium-6 small-6">
+    <% if @members.any? %>
+      <fieldset class="form--fieldset">
+        <legend class="form--fieldset-legend"><%= l(:label_member_plural) %></legend>
+        <div class="generic-table--container">
+          <div class="generic-table--results-container">
+            <table class="generic-table list members">
+              <tbody>
+                <% @members.each do |member| %>
+                  <% next if member.new_record? %>
+                  <tr id="member-<%= member.id %>" class="member">
+                    <td class="member -no-padding-left"><%= link_to_user member %></td>
+                    <td class="buttons">
+                      <%=
+                        link_to "",
+                                delete_member_company_path(id: @company, member_id: member.id),
+                                method: :post,
+                                title: t(:button_delete),
+                                class: 'icon icon-delete'
+                      %>
+                    </td>
+                  </tr>
+                <% end; reset_cycle %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </fieldset>
+    <% else %>
+        <%= no_results_box custom_title: t(:notice_no_users) %>
+    <% end %>
+  </div>
+
+  <div class="grid-content medium-6 small-6">
+    <% if @available_members.any? %>
+      <%=
+        form_for(
+          :member,
+          url: { :controller => 'companies', :action => 'add_members', :id => @company },
+          update: :members,
+          method: :post
+        ) do |f|
+      %>
+        <fieldset class="form--fieldset">
+          <legend class="form--fieldset-legend"><%= l(:label_member_new) %></legend>
+
+          <p><%= label_tag "member_search", l(:label_member_filter), :class => 'filter_label' %>
+          <%= text_field_tag 'member_search', nil %></p>
+          <%#= observe_field( :member_search, :method => :get, :frequency => 0.5, :update => :available_members, :url => {:action => "filter_available_members", :controller=>"companies" , :id => @company }, :with => "q" ) %>
+          <div id="available_members" class="filtered_results">
+            <%= render :partial => 'available_members' %>
+          </div>
+
+          <%= styled_button_tag t(:button_add), class: '-highlight -with-icon icon-checkmark' %>
+        </fieldset>
+      <% end %>
+    <% end %>
+  </div>
+</div>

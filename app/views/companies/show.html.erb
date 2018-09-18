@@ -1,0 +1,77 @@
+<% html_title "#{t(:label_company)} - #{@company.name}" %>
+<% breadcrumb_paths(default_breadcrumb, @company.name) %>
+
+<%= toolbar title: @company.name do %>
+  <% if User.current.allowed_to?(:edit_company, nil, :global => true) %>
+    <li class="toolbar-item">
+      <%= link_to edit_company_path(@company), :class => 'button' do %>
+        <%= op_icon('button--icon icon-edit') %>
+        <span class="button--text"><%= t(:label_edit) %></span>
+      <% end %>
+    </li>
+  <% end %>
+  <% if User.current.allowed_to?(:add_company, nil, :global => true) %>
+    <li class="toolbar-item">
+      <%= link_to new_company_path, :class => 'button -alt-highlight' do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text"><%= t(:label_company)  %></span>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
+
+<h3><%= @company.short_description %></h3>
+
+<div class="grid-block -no-outer-padding">
+  <div id="company-description" class="grid-content">
+    <% if @company.url.present? %>
+      <p><%= link_to @company.url, @company.url, :class => "external" %></p>
+    <% end %>
+
+    <%= logo_of(@company) %>
+
+    <%= format_text @company.description %>
+
+    <% if @company.has_custom_values? %>
+      <% @company.custom_values.each do |custom_value| %>
+        <div class="form--field">
+            <label class="form--label">
+              <b><%= custom_value.custom_field.name %></b>
+            </label>
+            <span class="form--field-container">
+              <%= show_value(custom_value) %>
+            </span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div id="company-relations" class="grid-content widget-boxes">
+    <% if @projects.any? %>
+      <div class="projects widget-box">
+        <h3 class="widget-box--header">
+          <%= op_icon('icon-context icon-projects') %>
+          <span class="widget-box--header-title"><%= t(:label_project_plural) %></span>
+        </h3>
+        <%= render_project_list @projects %>
+      </div>
+    <% end %>
+    <% if @members.any? %>
+      <div class="members widget-box">
+        <h3 class="widget-box--header">
+          <%= op_icon('icon-context icon-group') %>
+          <span class="widget-box--header-title"><%= t(:label_member_plural) %></span>
+        </h3>
+        <ul>
+          <% @members.each do |member| %>
+            <li><%= link_to member.name, member %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'companies/companies', plugin: 'openproject_companies' %>
+<% end %>
