@@ -145,14 +145,14 @@ class CompaniesController < ApplicationController
   end
 
   def default_breadcrumb
-    if action_name == 'index'
-      t('label_company_plural')
-    else
-      ActionController::Base.helpers.link_to(t('label_company_plural'), companies_path)
-    end
+    ActionController::Base.helpers.link_to(t('label_company_plural'), companies_path)
   end
 
   def show_local_breadcrumb
-    true
+    if action_name == 'index'
+      false
+    else
+      true
+    end
   end
 end
